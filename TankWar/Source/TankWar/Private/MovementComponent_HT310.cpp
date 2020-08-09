@@ -22,9 +22,29 @@ void UMovementComponent_HT310::MoveForward(float Throtel)
 
 void UMovementComponent_HT310::MoveRight(float Throtel)
 {
-	BL->SetMovement(0, Throtel);
-	BR->SetMovement(0, Throtel);
-	FL->SetMovement(0, Throtel);
-	FR->SetMovement(0, Throtel);
+	BL->SetMovement(0, -Throtel);
+	BR->SetMovement(0, -Throtel);
+	FL->SetMovement(0, -Throtel);
+	FR->SetMovement(0, -Throtel);
+}
+
+void UMovementComponent_HT310::Rotate(float Throtel)
+{
+	auto TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
+	TankRoot->AddLocalRotation(FRotator(0, Throtel, 0));
+	
+}
+
+void UMovementComponent_HT310::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	auto TankForward = GetOwner()->GetActorRightVector().GetSafeNormal();
+	auto AIForwardIntetion = MoveVelocity.GetSafeNormal();
+
+	auto ThrowForward = FVector::DotProduct(TankForward, AIForwardIntetion);
+	MoveForward(ThrowForward);
+
+	auto ThrowRight = FVector::CrossProduct(TankForward, AIForwardIntetion).Z;
+	Rotate(ThrowRight);
+	
 }
 

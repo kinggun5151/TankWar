@@ -32,3 +32,9 @@ void ATank_HT310::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 }
 
+void ATank_HT310::Fire()
+{
+
+}
+
+

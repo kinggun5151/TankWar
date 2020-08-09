@@ -24,11 +24,15 @@ public:
 		void MoveForward(float Throtel);
 	UFUNCTION(BlueprintCallable, Category = "Movement")
 		void MoveRight(float Throtel);
+	UFUNCTION(BlueprintCallable, Category = "Movement")
+		void Rotate(float Throtel);
 
 private:
 	UMotor_HT310* BL = nullptr;
 	UMotor_HT310* BR = nullptr;
 	UMotor_HT310* FL = nullptr;
 	UMotor_HT310* FR = nullptr;
+
+	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 
 };

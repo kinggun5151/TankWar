@@ -2,6 +2,8 @@
 
 
 #include "Tank_HT310.h"
+#include "Projectile_HT310.h"
+
 
 // Sets default values
 ATank_HT310::ATank_HT310()
@@ -34,7 +36,26 @@ void ATank_HT310::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 void ATank_HT310::Fire()
 {
+	
+	if ((FPlatformTime::Seconds() - LastTimeFire) > ReloadTime)
+	{
+		auto Projectile_L = GetWorld()->SpawnActor<AProjectile_HT310>(
+			ProjectileBlueprint,
+			GetRootComponent()->GetSocketLocation(FName("Gun_L")),
+			GetRootComponent()->GetSocketRotation(FName("Gun_L"))
+			);
+		
+		auto Projectile_R = GetWorld()->SpawnActor<AProjectile_HT310>(
+			ProjectileBlueprint,
+			GetRootComponent()->GetSocketLocation(FName("Gun_R")),
+			GetRootComponent()->GetSocketRotation(FName("Gun_R"))
+			);
+		
+		Projectile_L->LaunchProjectile(LaunchSpeed);
+		Projectile_R->LaunchProjectile(LaunchSpeed);
 
+		LastTimeFire = FPlatformTime::Seconds();
+	}
 }
 
 

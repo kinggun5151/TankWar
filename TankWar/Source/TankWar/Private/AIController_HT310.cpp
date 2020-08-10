@@ -15,6 +15,6 @@ void AAIController_HT310::BeginPlay()
 
 void AAIController_HT310::Tick(float DeltaSeconds)
 {
-	ControlledTank->Fire();
+	//ControlledTank->Fire();
 	MoveToActor(PlayerTank, AcceptanceRadius);
 }

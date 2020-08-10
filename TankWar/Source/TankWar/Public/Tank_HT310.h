@@ -6,6 +6,8 @@
 #include "GameFramework/Pawn.h"
 #include "Tank_HT310.generated.h"
 
+class AProjectile_HT310;
+
 UCLASS()
 class TANKWAR_API ATank_HT310 : public APawn
 {
@@ -26,6 +28,18 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+		TSubclassOf<AProjectile_HT310> ProjectileBlueprint;
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		float LaunchSpeed = 4000.0f;
+
 	UFUNCTION(BlueprintCallable, Category = "Fire")
 		void Fire();
+
+private:
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		float ReloadTime = 3.0f;
+
+	double LastTimeFire = 0;
 };

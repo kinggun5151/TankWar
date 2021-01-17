@@ -35,6 +35,16 @@ void UMovementComponent_HT310::Rotate(float Throtel)
 	
 }
 
+void UMovementComponent_HT310::Fly(float Throtel)
+{
+	//UE_LOG(LogTemp, Warning, TEXT(" its here bitches"));
+	BL->StartFlying(Throtel);
+	BR->StartFlying(Throtel);
+	FL->StartFlying(Throtel);
+	FR->StartFlying(Throtel);
+
+}
+
 void UMovementComponent_HT310::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
 {
 	auto TankForward = GetOwner()->GetActorRightVector().GetSafeNormal();

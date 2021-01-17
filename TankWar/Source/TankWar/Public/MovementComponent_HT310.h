@@ -26,6 +26,8 @@ public:
 		void MoveRight(float Throtel);
 	UFUNCTION(BlueprintCallable, Category = "Movement")
 		void Rotate(float Throtel);
+	UFUNCTION(BlueprintCallable, Category = "Movement")
+		void Fly(float Throtel);
 
 private:
 	UMotor_HT310* BL = nullptr;

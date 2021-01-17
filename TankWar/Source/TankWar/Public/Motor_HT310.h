@@ -16,8 +16,11 @@ class TANKWAR_API UMotor_HT310 : public UStaticMeshComponent
 
 public:
     void SetMovement(float ForwrdMovement, float RightMovement);
+    void StartFlying(float Throtel);
 
 private:
     UPROPERTY(EditDefaultsOnly, Category = "Movement")
         float Speed = 60000000;
+    UPROPERTY(EditDefaultsOnly, Category = "Movement")
+        float FlyingSpeed = 150000000;
 };
